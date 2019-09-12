@@ -52,4 +52,8 @@ public class PlayerDAO {
 		Player p = dao.getPlayer(1);
 		System.out.println(p);
 	}
+	public static void findPlayer(String query) {
+		//TODO: Complete this.
+	}
 }
+
