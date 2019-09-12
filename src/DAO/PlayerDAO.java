@@ -2,14 +2,13 @@ package DAO;
 import Main.*;
 import java.sql.*;
 public class PlayerDAO {
-	Connection con=null;
+	Connection con;
 	static final String url = "jdbc:mysql://localhost:3306/cricket";
 	static final  String username = "root";
 	static final String password = "root";
 	public void connect(){
 		try{
-			System.out.println("Inside try");
-			Connection con = DriverManager.getConnection(url, username, password);
+			con = DriverManager.getConnection(url, username, password);
 		}catch(SQLException e){
 			System.out.println("Error in setting connection");
 			e.printStackTrace();
@@ -20,6 +19,7 @@ public class PlayerDAO {
 			con.close();
 		} catch (SQLException e) {
 			System.out.println("Error in closing the connection");
+			e.printStackTrace();
 		}
 	}
 	public Player getPlayer(int id){
@@ -39,9 +39,8 @@ public class PlayerDAO {
 			bowlStyle=rs.getString(6);
 			dob=rs.getString(7);
 		} catch (Exception e) {
-			if(con==null)
-				System.out.println("Con is null");
 			System.out.println("Error in creating statement ");
+			e.printStackTrace();
 		}
 		p = new Player(id, name, role, country, batStyle, bowlStyle, dob);
 		return p;
@@ -49,6 +48,7 @@ public class PlayerDAO {
 	public static void main(String[]args){
 		PlayerDAO dao = new PlayerDAO();
 		dao.connect();
+		
 		Player p = dao.getPlayer(1);
 		System.out.println(p);
 	}
