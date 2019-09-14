@@ -27,16 +27,17 @@ public class PlayerDAO {
 		String query = "select * from player where id = "+id;
 		Statement st = null;
 		ResultSet rs=null;
-		String name=null,role=null,country=null,batStyle=null,bowlStyle=null,dob=null;
+		int role=-1,country=-1,batStyle=-1,bowlStyle=-1;
+		String name=null,dob=null;
 		try {
 			st = con.createStatement();
 			rs  = st.executeQuery(query);
 			rs.next();
 			name=rs.getString(2);
-			role=rs.getString(3);
-			country=rs.getString(4);
-			batStyle=rs.getString(5);
-			bowlStyle=rs.getString(6);
+			role=rs.getInt(3);
+			country=rs.getInt(4);
+			batStyle=rs.getInt(5);
+			bowlStyle=rs.getInt(6);
 			dob=rs.getString(7);
 		} catch (Exception e) {
 			System.out.println("Error in creating statement ");
@@ -45,15 +46,35 @@ public class PlayerDAO {
 		p = new Player(id, name, role, country, batStyle, bowlStyle, dob);
 		return p;
 	}
-	public static void main(String[]args){
+	public static void main(String[]args) throws SQLException{
 		PlayerDAO dao = new PlayerDAO();
 		dao.connect();
-		
-		Player p = dao.getPlayer(1);
-		System.out.println(p);
+		Player p = new Player(1,"asd",1,1,1,1,"1999-4-13");
+		dao.insertPlayer(p);
+		dao.close();
 	}
 	public static void findPlayer(String query) {
 		//TODO: Complete this.
 	}
+	public void insertPlayer(Player p)throws SQLException{
+		String name,dob;
+		int role,country,batStyle,bowlStyle;
+		role=p.role;
+		country=p.country;
+		name=p.name;
+		batStyle=p.batStyle;
+		bowlStyle=p.bowlStyle;
+		dob=p.dob;
+		String query="insert into player (name,role,country,batting_style,bowling_style,dob) values(?,?,?,?,?,?)";
+		PreparedStatement st=con.prepareStatement(query);
+		st.setString(1,name);
+		st.setInt(2,role);
+		st.setInt(3,country);
+		st.setInt(4,batStyle);
+		st.setInt(5,bowlStyle);
+		st.setString(6,dob);
+		st.executeUpdate();
+	}
 }
+
 
