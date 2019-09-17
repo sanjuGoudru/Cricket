@@ -28,7 +28,9 @@ public class PlayerDAO {
 		}
 	}
 
-	public Player getPlayer(int id){
+
+	public Player getPlayer(int id) {
+
 		Player p = null;
 		String query = "select * from player where id = " + id;
 		Statement st = null;
@@ -62,23 +64,35 @@ public class PlayerDAO {
 	public ArrayList<Player> findPlayer(String query) throws IllegalArgumentException, SQLException {
 		StringTokenizer st = new StringTokenizer(query, "$");
 		if (st.countTokens() != 5) {
+			Log.add("$ count is now 5.Instead it is " + st.countTokens());
 			throw new IllegalArgumentException("Expected $: 5\nActual $:" + st.countTokens());
 		}
 		String[] arg = new String[5];
 		for (int i = 0; i < arg.length; i++) {
 			arg[i] = st.nextToken();
 		}
+		Log.add("arg[]  is set up.");
 		String name;
 		int role, country, battingStyle, bowlingStyle;
-		if (arg[0].equals("#"))
+
+		if (arg[0].equals("#")) {
+			Log.add("Name is empty");
 			name = "";
-		else
+		}
+		else {
+			Log.add("Name is "+arg[0]);
 			name = arg[0];
+		}
+
 		try {
 			role = Integer.parseInt(arg[1]);
+			Log.add("Role is set up");
 			country = Integer.parseInt(arg[2]);
+			Log.add("Country is set up");
 			battingStyle = Integer.parseInt(arg[3]);
+			Log.add("battingStyle is set up");
 			bowlingStyle = Integer.parseInt(arg[4]);
+			Log.add("BowlingStyle is set up");
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("Any of role,country,batting_style,bowling_style are wrong", e);
 		}
@@ -90,17 +104,23 @@ public class PlayerDAO {
 			throw new IllegalArgumentException("Batting Style value is invalid. BattingStyle:" + battingStyle);
 		if (bowlingStyle < PlayerConstants.MIN_BOWLING_STYLE || bowlingStyle > PlayerConstants.MAX_BOWLING_STYLE)
 			throw new IllegalArgumentException("Bowling Style value is invalid. BowlingStyle:" + bowlingStyle);
-		String dbmsQuery = "select id from player where  name like '%" + name + "% ";
+
+		Log.add("Every parameter is valid");
+		String dbmsQuery = "select id from player where  name like '%" + name + "%' ";
 		if (role != PlayerConstants.Role.ANYTHING) {
+			Log.add("Role is something");
 			dbmsQuery += "and role=" + role + " ";
 		}
 		if (country != PlayerConstants.Country.ANYTHING) {
+			Log.add("Country is something");
 			dbmsQuery += "and country=" + country + " ";
 		}
 		if (battingStyle != PlayerConstants.BattingStyle.ANYTHING) {
+			Log.add("BattingStyle is something");
 			dbmsQuery += "and batting_style=" + battingStyle + " ";
 		}
 		if (bowlingStyle != PlayerConstants.BowlingStyle.ANYTHING) {
+			Log.add("Bowling Style is something");
 			dbmsQuery += "and bowling_style=" + bowlingStyle + " ";
 		}
 		Statement s = null;
