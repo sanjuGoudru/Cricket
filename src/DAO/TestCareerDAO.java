@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class TestCareerDAO {
-	Connection con;
+	Connection con=null;
 	static final String url = "jdbc:mysql://localhost:3306/cricket";
 	static final String username = "root";
 	static final String password = "root";
