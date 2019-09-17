@@ -6,16 +6,15 @@ import Main.*;
 
 public class Demo{
 	public static void main(String[] args){
-		PlayerDAO dao = new PlayerDAO();
+		TestCareerDAO dao = new TestCareerDAO();
 		dao.connect();
-		ArrayList<Player> players=null;
+		TestCareer tc = new TestCareer(4, 4, 4, 4, 4, 4, 4, 4);
 		try {
-			players = dao.findPlayer("$#$0$1$0$0");
-		} catch (Exception e) {
-			Log.print();
+			dao.insertTestCareer(tc);
+		} catch (SQLException e) {
+			System.out.println("Errorrrr");
 			e.printStackTrace();
 		}
-		System.out.println(players.toString());
 		dao.close();
 	}
 }
