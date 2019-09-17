@@ -120,4 +120,28 @@ public class TestCareerDAO {
 		pst.setInt(2, id);
 		pst.executeUpdate();
 	}
+
+	public void updateRuns(int id, int runs) throws SQLException {
+		String query = "upadte test_career set runs=? where id=?";
+		PreparedStatement pst = con.prepareStatement(query);
+		pst.setInt(1, runs);
+		pst.setInt(2, id);
+		pst.executeUpdate();
+	}
+
+	public void updateMatches(int id, int matches) throws SQLException {
+		String query = "upadte test_career set matches=? where id=?";
+		PreparedStatement pst = con.prepareStatement(query);
+		pst.setInt(1, matches);
+		pst.setInt(2, id);
+		pst.executeUpdate();
+	}
+
+	public void updateWickets(int id, int wickets) throws SQLException {
+		String query = "upadte test_career set wickets=? where id=?";
+		PreparedStatement pst = con.prepareStatement(query);
+		pst.setInt(1, wickets);
+		pst.setInt(2, id);
+		pst.executeUpdate();
+	}
 }
