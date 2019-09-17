@@ -23,7 +23,7 @@ public class PlayerDAO {
 			e.printStackTrace();
 		}
 	}
-	public Player getPlayer(int id){
+	public Player getPlayer(int id) throws SQLException{
 		Player p=null;
 		String query = "select * from player where id = "+id;
 		Statement st = null;
@@ -45,15 +45,11 @@ public class PlayerDAO {
 			e.printStackTrace();
 		}
 		p = new Player(id, name, role, country, batStyle, bowlStyle, dob);
+		st.close();
 		return p;
+		
 	}
-	public static void main(String[]args) throws SQLException{
-		PlayerDAO dao = new PlayerDAO();
-		dao.connect();
-		Player p = new Player(1,"asd",1,1,1,1,"1999-4-13");
-		dao.insertPlayer(p);
-		dao.close();
-	}
+	
 	public ArrayList<Player> findPlayer(String query) throws IllegalArgumentException,SQLException{
 		StringTokenizer st = new StringTokenizer(query, "$");
 		if(st.countTokens()!=5) {
@@ -126,6 +122,7 @@ public class PlayerDAO {
 		st.setInt(5,bowlStyle);
 		st.setString(6,dob);
 		st.executeUpdate();
+		st.close();
 	}
 }
 
