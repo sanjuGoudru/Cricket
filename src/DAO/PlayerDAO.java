@@ -28,7 +28,7 @@ public class PlayerDAO {
 		}
 	}
 
-	public Player getPlayer(int id) throws SQLException {
+	public Player getPlayer(int id){
 		Player p = null;
 		String query = "select * from player where id = " + id;
 		Statement st = null;
@@ -50,7 +50,11 @@ public class PlayerDAO {
 			e.printStackTrace();
 		}
 		p = new Player(id, name, role, country, batStyle, bowlStyle, dob);
-		st.close();
+		try {
+			st.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return p;
 
 	}
