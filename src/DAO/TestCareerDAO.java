@@ -88,4 +88,36 @@ public class TestCareerDAO {
 		st.executeUpdate();
 		st.close();
 	}
+
+	public void updateBattingAverage(int id, double battingAvg) throws SQLException {
+		String query = "update test_career set batting_avg=? where id=?";
+		PreparedStatement pst = con.prepareStatement(query);
+		pst.setDouble(1, battingAvg);
+		pst.setInt(2, id);
+		pst.executeUpdate();
+	}
+
+	public void updateBowlingAverage(int id, double bowlingAvg) throws SQLException {
+		String query = "update test_career set bowling_avg=? where id=?";
+		PreparedStatement pst = con.prepareStatement(query);
+		pst.setDouble(1, bowlingAvg);
+		pst.setInt(2, id);
+		pst.executeUpdate();
+	}
+
+	public void updateBattingStrikeRate(int id, double battingSR) throws SQLException {
+		String query = "update test_career set batting_sr=? where id=?";
+		PreparedStatement pst = con.prepareStatement(query);
+		pst.setDouble(1, battingSR);
+		pst.setInt(2, id);
+		pst.executeUpdate();
+	}
+
+	public void updateBowlingStrikeRate(int id, double bowlingSR) throws SQLException {
+		String query = "update test_career set bowling_sr=? where id=?";
+		PreparedStatement pst = con.prepareStatement(query);
+		pst.setDouble(1, bowlingSR);
+		pst.setInt(2, id);
+		pst.executeUpdate();
+	}
 }

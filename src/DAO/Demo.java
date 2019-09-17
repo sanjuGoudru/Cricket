@@ -11,6 +11,7 @@ public class Demo{
 		TestCareer tc = new TestCareer(4, 4, 4, 4, 4, 4, 4, 4);
 		try {
 			dao.insertTestCareer(tc);
+			dao.updateBattingAverage(4, 10.5);
 		} catch (SQLException e) {
 			System.out.println("Errorrrr");
 			e.printStackTrace();
