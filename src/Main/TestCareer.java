@@ -14,7 +14,7 @@ public class TestCareer {
 		batting_avg = bta;
 		bowling_avg = boa;
 		batting_sr = bts;
-		bowling_avg = bos;
+		bowling_sr = bos;
 	}
 
 	public TestCareer(int m, int r, int w, double bta, double boa, double bts, double bos) {
@@ -26,7 +26,7 @@ public class TestCareer {
 		batting_avg = bta;
 		bowling_avg = boa;
 		batting_sr = bts;
-		bowling_avg = bos;
+		bowling_sr = bos;
 	}
 
 	public String toString() {
