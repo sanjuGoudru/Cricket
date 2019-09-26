@@ -6,17 +6,18 @@ import Main.*;
 
 public class Demo{
 	public static void main(String[] args){
-		TestCareerDAO dao = new TestCareerDAO();
-		dao.connect();
-		TestCareer tc = new TestCareer(4, 4, 4, 4, 4, 4, 4, 4);
-		try {
-			dao.insertTestCareer(tc);
-			dao.updateBattingAverage(4, 10.5);
-		} catch (SQLException e) {
-			System.out.println("Errorrrr");
-			e.printStackTrace();
+		PlayerDAO dao=null;
+		try{
+			dao = new PlayerDAO();
+			dao.connect();
+		ArrayList<Player> p = dao.findPlayer("$#$2$0$0$0");
+		for(Player pl:p)
+			System.out.println(pl);
+		}catch(Exception e) {
+			Log.print();
+		}finally {
+			dao.close();
 		}
-		dao.close();
 	}
 }
 
