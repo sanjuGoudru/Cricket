@@ -4,3 +4,5 @@
 .classpath
 *.class
 src/DAO/Demo.java
+*.class
+src/DAO/Demo.java

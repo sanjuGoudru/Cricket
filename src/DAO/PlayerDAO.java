@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.*;
 
 public class PlayerDAO {
-	Connection con;
+	Connection con=null;
 	static final String url = "jdbc:mysql://localhost:3306/cricket";
 	static final String username = "root";
 	static final String password = "root";
