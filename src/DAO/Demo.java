@@ -6,17 +6,21 @@ import Main.*;
 
 public class Demo{
 	public static void main(String[] args){
-		PlayerDAO dao=null;
-		try{
-			dao = new PlayerDAO();
-			dao.connect();
-		ArrayList<Player> p = dao.findPlayer("$#$2$0$0$0");
-		for(Player pl:p)
-			System.out.println(pl);
+		TestCareerDAO tcdao = new TestCareerDAO();
+		ODICareerDAO ocdao = new ODICareerDAO();
+		T20CareerDAO t20dao = new T20CareerDAO();
+		tcdao.connect();
+		ocdao.connect();
+		t20dao.connect();
+		try {
+			TestCareer tc = tcdao.getTestCareer(1);
+			ODICareer oc = ocdao.getODICareer(1);
+			T20Career t20c = t20dao.getT20Career(1);
+			System.out.println(tc);
+			System.out.println(oc);
+			System.out.println(t20c);
 		}catch(Exception e) {
-			Log.print();
-		}finally {
-			dao.close();
+			e.printStackTrace();
 		}
 	}
 }
