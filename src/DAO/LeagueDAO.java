@@ -38,11 +38,11 @@ public class LeagueDAO {
 		String query = "select * from team where lid = " + lid;
 		Statement st = null;
 		ResultSet rs = null;
-
 		st = con.createStatement();
 		rs = st.executeQuery(query);
 		while (rs.next())
 			teams.add(new Team(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)));
+		st.close();
 		return teams;
 	}
 
@@ -52,11 +52,26 @@ public class LeagueDAO {
 		ResultSet rs = null;
 		st = con.createStatement();
 		rs = st.executeQuery(query);
-		ArrayList<League> l = new ArrayList<League>();
+		ArrayList<League> leagues = new ArrayList<League>();
 		while (rs.next()) {
-			l.add(new League(rs.getInt(1), rs.getString(2), rs.getString(3)));
+			leagues.add(new League(rs.getInt(1), rs.getString(2), rs.getString(3)));
 		}
-		return l;
+		st.close();
+		return leagues;
 	}
 
+	public ArrayList<Player> getAllPlayers(int tid, int lid) throws SQLException {
+		ArrayList<Player> players = new ArrayList<Player>();
+		String query = "select * from player where id in (select pid from league_players where lid = " + lid
+				+ " and tid = " + tid + ")";
+		Statement st = null;
+		ResultSet rs = null;
+		st = con.createStatement();
+		rs = st.executeQuery(query);
+		while (rs.next())
+			players.add(new Player(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),
+					rs.getInt(6), rs.getString(7)));
+		st.close();
+		return players;
+	}
 }
