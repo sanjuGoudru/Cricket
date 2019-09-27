@@ -45,4 +45,18 @@ public class LeagueDAO {
 			teams.add(new Team(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)));
 		return teams;
 	}
+
+	public ArrayList<League> getAllLeagues() throws SQLException {
+		String query = "select * from league";
+		Statement st = null;
+		ResultSet rs = null;
+		st = con.createStatement();
+		rs = st.executeQuery(query);
+		ArrayList<League> l = new ArrayList<League>();
+		while (rs.next()) {
+			l.add(new League(rs.getInt(1), rs.getString(2), rs.getString(3)));
+		}
+		return l;
+	}
+
 }
